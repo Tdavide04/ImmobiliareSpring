@@ -18,7 +18,7 @@ import com.gestione.Immobiliare.model.Immobile;
 import com.gestione.Immobiliare.service.IImmobileService;
 
 @RestController
-@RequestMapping("immobili")
+@RequestMapping("property")
 public class ImmobileController {
 
 	@Autowired
@@ -53,7 +53,7 @@ public class ImmobileController {
 			ImmobileDTO immobile = immobileService.aggiungiImmobile(immobileDto);
 			return ResponseEntity.ok(immobile);
 		} catch (Exception e) {
-			return ResponseEntity.badRequest().body("Errore durante la registrazione: " + e.getMessage());
+			return ResponseEntity.badRequest().body("Errore durante l'aggiunta dell'immobile: " + e.getMessage());
 		}
 	}
 
@@ -64,7 +64,7 @@ public class ImmobileController {
 			Immobile immobile = immobileService.trovaPerId(immobileDto.getIdImmobile()).get();
 			return ResponseEntity.ok(immobile);
 		} catch (Exception e) {
-			return ResponseEntity.badRequest().body("Errore durante la registrazione: " + e.getMessage());
+			return ResponseEntity.badRequest().body("Errore durante la modifica dell'immobile: " + e.getMessage());
 		}
 	}
 	
@@ -74,7 +74,7 @@ public class ImmobileController {
 			immobileService.rimuoviImmobile(idImmobile);
 			return ResponseEntity.ok().build();
 		} catch (Exception e) {
-			return ResponseEntity.badRequest().body("Errore durante la registrazione: " + e.getMessage());
+			return ResponseEntity.badRequest().body("Errore durante la cancellazione dell'immobile: " + e.getMessage());
 		}
 	}
 }

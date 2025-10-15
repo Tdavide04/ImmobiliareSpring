@@ -32,7 +32,7 @@ public class Vendita {
     private BigDecimal prezzo;
     
     @Column(name = "data_creazione", nullable = false)
-    private LocalDateTime dataCreazione;
+    private LocalDateTime dataCreazione = LocalDateTime.now();
 
     public Vendita() {
     }
@@ -41,7 +41,6 @@ public class Vendita {
         this.immobile = immobile;
         this.utente = utente;
         this.prezzo = prezzo;
-        this.dataCreazione = LocalDateTime.now();
     }
 
     public Long getIdVendita() {

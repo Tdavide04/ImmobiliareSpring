@@ -4,7 +4,9 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+import jakarta.persistence.CollectionTable;
 import jakarta.persistence.Column;
+import jakarta.persistence.ElementCollection;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -12,8 +14,6 @@ import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
 import jakarta.persistence.Table;
 
 @Entity
@@ -41,14 +41,15 @@ public class Immobile {
     private Integer superficie;
     
     @Column(name = "disponibile", nullable = false)
-    private Boolean disponibile;
+    private Boolean disponibile = true;
 
-    @ManyToMany
-    @JoinTable(
+    @ElementCollection(targetClass = Tipologia.class)
+    @CollectionTable(
         name = "immobile_tipologie",
-        joinColumns = @JoinColumn(name = "id_immobile"),
-        inverseJoinColumns = @JoinColumn(name = "id_tipologia")
+        joinColumns = @JoinColumn(name = "id_immobile")
     )
+    @Enumerated(EnumType.STRING)
+    @Column(name = "tipologia")
     private List<Tipologia> tipologie = new ArrayList<>();
 
     @Enumerated(EnumType.STRING)
@@ -59,13 +60,12 @@ public class Immobile {
     }
 
     public Immobile(String nome, String indirizzo, String citta, BigDecimal prezzo, Integer superficie,
-                    Boolean disponibile ,List<Tipologia> tipologie, CategoriaCatastale categoriaCatastale) {
+                    List<Tipologia> tipologie, CategoriaCatastale categoriaCatastale) {
         this.nome = nome;
         this.indirizzo = indirizzo;
         this.citta = citta;
         this.prezzo = prezzo;
         this.superficie = superficie;
-        this.disponibile = disponibile;
         this.tipologie = tipologie != null ? tipologie : new ArrayList<>();
         this.categoriaCatastale = categoriaCatastale;
     }

@@ -24,7 +24,7 @@ public class ImmobileService implements IImmobileService {
 
 	@Override
 	public ImmobileDTO aggiungiImmobile(ImmobileDTO immobileDto) throws Exception {
-		if(immobileRepository.existByNome(immobileDto.getNome())) {
+		if(immobileRepository.existsByNome(immobileDto.getNome())) {
 			throw new Exception("Immobile già esistente");
 		}
 		Immobile immobile = new Immobile();
@@ -45,6 +45,7 @@ public class ImmobileService implements IImmobileService {
 				.citta(immobile.getCitta())
 				.prezzo(immobile.getPrezzo())
 				.superficie(immobile.getSuperficie())
+				.disponibile(immobile.getDisponibile())
 				.tipologie(immobile.getTipologie())
 				.categoriaCatastale(immobile.getCategoriaCatastale())
 				.build();
