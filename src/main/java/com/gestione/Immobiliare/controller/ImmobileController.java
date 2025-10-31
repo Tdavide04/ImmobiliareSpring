@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -35,8 +36,8 @@ public class ImmobileController {
 	    }
 	}
 	
-	@GetMapping("/see")
-	public ResponseEntity getImmobile(@RequestParam Long id) {
+	@GetMapping("/see/{id}")
+	public ResponseEntity getImmobile(@PathVariable Long id) {
 	    try {
 	        Immobile immobile = immobileService.trovaPerId(id).get();
 	        return ResponseEntity.ok(immobile);
@@ -57,7 +58,7 @@ public class ImmobileController {
 		}
 	}
 
-	@PutMapping("/edit")
+	@PutMapping("/edit/{id}")
 	public ResponseEntity modificaImmobile(@RequestBody ImmobileDTO immobileDto) {
 		try {
 
@@ -68,7 +69,7 @@ public class ImmobileController {
 		}
 	}
 	
-	@DeleteMapping("/elimina")
+	@DeleteMapping("/delete/{id}")
 	public ResponseEntity eliminaImmobile(@RequestParam Long idImmobile) {
 		try {
 			immobileService.rimuoviImmobile(idImmobile);
