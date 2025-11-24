@@ -3,9 +3,9 @@ spring:
     name: GestioneEventi
     version: 0.0.1-SNAPSHOT
   datasource:
-    url: jdbc:mysql://localhost:3306/gestione_immobiliare?useSSL=false&allowPublicKeyRetrieval=true
-    username: root
-    password: root
+    url: ${DATABASE_URL:jdbc:mysql://localhost:3306/gestione_immobiliare?useSSL=false&allowPublicKeyRetrieval=true}
+    username: ${DATABASE_USERNAME:root}
+    password: ${DATABASE_PASSWORD:root}
     driver-class-name: com.mysql.cj.jdbc.Driver
 
     hikari:
