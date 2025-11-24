@@ -31,8 +31,8 @@ public class SecurityConfig {
                 .requestMatchers("/users/**").permitAll()
                 .requestMatchers("/property/see_all").permitAll()
                 .requestMatchers("/property/see/**").permitAll()
+                .requestMatchers("/sale/buy").authenticated()
                 .requestMatchers("/api/admin/**").hasRole("ADMIN")
-                .anyRequest().authenticated()
             )
             .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 

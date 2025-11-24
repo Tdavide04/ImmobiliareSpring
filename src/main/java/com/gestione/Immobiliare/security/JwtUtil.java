@@ -12,9 +12,10 @@ public class JwtUtil {
     private static final String SECRET_KEY = "Mario_Olla"; // cambia questa in produzione
     private static final long EXPIRATION_TIME = 60 * 60 * 1000; // 1 ora
 
-    public String generateToken(String username) {
+    public String generateToken(String username, String ruolo) {
         return JWT.create()
                 .withSubject(username)
+                .withClaim("ruolo", ruolo)
                 .withIssuedAt(new Date())
                 .withExpiresAt(new Date(System.currentTimeMillis() + EXPIRATION_TIME))
                 .sign(Algorithm.HMAC256(SECRET_KEY));

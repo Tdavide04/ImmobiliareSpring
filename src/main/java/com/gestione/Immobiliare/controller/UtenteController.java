@@ -1,5 +1,6 @@
 package com.gestione.Immobiliare.controller;
 
+import java.io.Console;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
@@ -40,23 +41,35 @@ public class UtenteController {
 	
 	@PostMapping("/login")
 	public ResponseEntity loginUtente(@RequestBody LoginRequest request) {
-		try {
-			Optional<UtenteDTO> utenteDto = utenteService.trovaLogin(request.getEmail(), request.getPassword());
-			
-			if (utenteDto.isPresent()) {
-				String token = jwtUtil.generateToken(utenteDto.get().getEmail());
-				Map<String, String> response = new HashMap<>();
+	    try {
+	        Optional<UtenteDTO> utenteDto = utenteService.trovaLogin(request.getEmail(), request.getPassword());
+	        
+	        if (utenteDto.isPresent()) {
+	            String token = jwtUtil.generateToken(
+	                utenteDto.get().getEmail(),
+	                utenteDto.get().getRuolo().name()
+	            );
+	            
+	            Map<String, Object> response = new HashMap<>();
 	            response.put("token", token);
+
+	            Map<String, Object> user = new HashMap<>();
+	            user.put("id", utenteDto.get().getIdUtente());
+	            user.put("username", utenteDto.get().getUsername());
+	            user.put("email", utenteDto.get().getEmail());
+	            response.put("user", user);
+
 	            return ResponseEntity.ok(response); 
 	        } else {
-	        	 Map<String, String> response = new HashMap<>();
-	             response.put("error", "Utente non trovato o credenziali errate");
-	             return ResponseEntity.status(404).body(response);
+	            Map<String, String> response = new HashMap<>();
+	            response.put("error", "Utente non trovato o credenziali errate");
+	            return ResponseEntity.status(404).body(response);
 	        }
-		} catch (Exception e) {
-			Map<String, String> response = new HashMap<>();
+	    } catch (Exception e) {
+	        Map<String, String> response = new HashMap<>();
 	        response.put("error", "Errore durante la login: " + e.getMessage());
 	        return ResponseEntity.badRequest().body(response);
-		}
+	    }
 	}
+
 }

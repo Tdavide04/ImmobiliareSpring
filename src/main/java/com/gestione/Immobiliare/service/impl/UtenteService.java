@@ -88,6 +88,7 @@ public class UtenteService implements IUtenteService{
 	    	Utente utente = utenteOpt.get();
 	    	if(passwordEncoder.matches(password, utente.getPassword())) {
 	    		 UtenteDTO utenteDto = new UtenteDTO.Builder()
+	    				 .idUtente(utente.getIdUtente())
 	                     .username(utente.getUsername())
 	                     .email(utente.getEmail())
 	                     .ruolo(utente.getRuolo())

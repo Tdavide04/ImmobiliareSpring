@@ -23,6 +23,15 @@ public class JwtFilter extends OncePerRequestFilter {
         this.jwtUtil = jwtUtil;
         this.userDetailsService = userDetailsService;
     }
+    
+    @Override
+    protected boolean shouldNotFilter(HttpServletRequest request) {
+        String path = request.getServletPath();
+        return path.startsWith("/users/") ||
+               path.equals("/property/see_all") ||
+               path.startsWith("/property/see/");
+    }
+
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
