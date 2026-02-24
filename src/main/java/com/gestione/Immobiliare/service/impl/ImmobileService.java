@@ -35,6 +35,7 @@ public class ImmobileService implements IImmobileService {
 		immobile.setSuperficie(immobileDto.getSuperficie());
 		immobile.setTipologie(immobileDto.getTipologie());
 		immobile.setCategoriaCatastale(immobileDto.getCategoriaCatastale());
+		immobile.setDisponibile(immobileDto.getDisponibilita());
 		
 		immobileRepository.save(immobile);
 		
@@ -66,6 +67,7 @@ public class ImmobileService implements IImmobileService {
 	        original.setSuperficie(immobileDto.getSuperficie());
 	        original.setTipologie(immobileDto.getTipologie());
 	        original.setCategoriaCatastale(immobileDto.getCategoriaCatastale());
+	        original.setDisponibile(immobileDto.getDisponibilita());
 
 	        Immobile updated = immobileRepository.save(original);
 
@@ -78,6 +80,7 @@ public class ImmobileService implements IImmobileService {
 	                .superficie(updated.getSuperficie())
 	                .tipologie(updated.getTipologie())
 	                .categoriaCatastale(updated.getCategoriaCatastale())
+	                .disponibile(updated.getDisponibile())
 	                .build();
 
 	    } else {
@@ -113,6 +116,7 @@ public class ImmobileService implements IImmobileService {
 					.superficie(immobile.getSuperficie())
 					.tipologie(immobile.getTipologie())
 					.categoriaCatastale(immobile.getCategoriaCatastale())
+					.disponibile(immobile.getDisponibile())
 					.build();
 			listDto.add(immobileDto);
 		}

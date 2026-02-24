@@ -28,14 +28,17 @@ public class SecurityConfig {
             .csrf(csrf -> csrf.disable())
             .cors(cors -> cors.configurationSource(corsConfigurationSource))
             .authorizeHttpRequests(auth -> auth
-                            .requestMatchers("/swagger-ui/**").permitAll()
-                    .requestMatchers("/v3/api-docs/**").permitAll()
-                .requestMatchers("/users/**").permitAll()
-                .requestMatchers("/property/see_all").permitAll()
-                .requestMatchers("/property/see/**").permitAll()
-                .requestMatchers("/sale/buy").authenticated()
-                .requestMatchers("/api/admin/**").hasRole("ADMIN")
-            )
+            	    .requestMatchers("/swagger-ui/**").permitAll()
+            	    .requestMatchers("/v3/api-docs/**").permitAll()
+            	    .requestMatchers("/users/**").permitAll()
+            	    .requestMatchers("/property/see_all").permitAll()
+            	    .requestMatchers("/property/see/**").permitAll()
+            	    .requestMatchers("/property/add").hasRole("ADMIN")
+            	    .requestMatchers("/property/edit/**").hasRole("ADMIN")
+            	    .requestMatchers("/property/delete/**").hasRole("ADMIN")
+            	    .requestMatchers("/sale/**").authenticated()
+            	    .requestMatchers("/api/admin/**").hasRole("ADMIN")
+            		)
             .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();

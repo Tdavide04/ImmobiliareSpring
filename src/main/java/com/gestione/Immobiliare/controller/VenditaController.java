@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gestione.Immobiliare.dto.BuyRequest;
 import com.gestione.Immobiliare.dto.VenditaDTO;
 import com.gestione.Immobiliare.service.IVenditaService;
 import com.gestione.Immobiliare.utility.VenditaTemplate;
@@ -22,9 +23,9 @@ public class VenditaController {
 	private IVenditaService venditaService;
 	
 	@PostMapping("/buy")
-	public ResponseEntity effettuaVendita(@RequestBody VenditaTemplate template) {
+	public ResponseEntity effettuaVendita(@RequestBody BuyRequest req) {
 		try {
-			VenditaDTO vendita = venditaService.effettuaVendita(template);
+			VenditaDTO vendita = venditaService.effettuaVendita(req.getNomeImmobile().trim());
 			return ResponseEntity.ok(vendita);
 		} catch (Exception e) {
 			return ResponseEntity.badRequest().body("Errore durante la vendita: " + e.getMessage());

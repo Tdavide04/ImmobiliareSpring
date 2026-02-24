@@ -7,7 +7,7 @@ import com.gestione.Immobiliare.utility.VenditaTemplate;
 
 public interface IVenditaService {
 
-	public VenditaDTO effettuaVendita(VenditaTemplate template) throws Exception;
+	public VenditaDTO effettuaVendita(String nomeimmobile) throws Exception;
 	public void cancellaVendita(Long idVendita) throws Exception;
-	public Optional<VenditaDTO> trovaPerId(Long idVendita) throws Exception;
+	public VenditaDTO trovaPerId(Long idVendita) throws Exception;
 }

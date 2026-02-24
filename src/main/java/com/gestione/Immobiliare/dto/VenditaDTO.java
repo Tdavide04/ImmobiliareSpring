@@ -3,52 +3,57 @@ package com.gestione.Immobiliare.dto;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
-import com.gestione.Immobiliare.model.Immobile;
-import com.gestione.Immobiliare.model.Utente;
-
 public class VenditaDTO {
 
     private Long idVendita;
-    private Immobile immobile;
-    private Utente utente;
+
+    private Long immobileId;
+    private String immobileNome;
+
+    private Long utenteId;
+    private String utenteUsername;
+    private String utenteEmail;
+
     private BigDecimal prezzo;
     private LocalDateTime dataCreazione;
 
-    public VenditaDTO() {
-    }
+    public VenditaDTO() {}
 
     private VenditaDTO(Builder builder) {
         this.idVendita = builder.idVendita;
-        this.immobile = builder.immobile;
-        this.utente = builder.utente;
+
+        this.immobileId = builder.immobileId;
+        this.immobileNome = builder.immobileNome;
+
+        this.utenteId = builder.utenteId;
+        this.utenteUsername = builder.utenteUsername;
+        this.utenteEmail = builder.utenteEmail;
+        
         this.prezzo = builder.prezzo;
         this.dataCreazione = builder.dataCreazione;
     }
 
-    public Long getIdVendita() {
-        return idVendita;
-    }
+    public Long getIdVendita() { return idVendita; }
+    public Long getImmobileId() { return immobileId; }
+    public String getImmobileNome() { return immobileNome; }
 
-    public Immobile getImmobile() {
-        return immobile;
-    }
+    public Long getUtenteId() { return utenteId; }
+    public String getUtenteUsername() { return utenteUsername; }
+    public String getUtenteEmail() { return utenteEmail; }
 
-    public Utente getUtente() {
-        return utente;
-    }
-
-    public BigDecimal getPrezzo() {
-        return prezzo;
-    }
-
-    public LocalDateTime getDataCreazione() {
-        return dataCreazione;
-    }
+    public BigDecimal getPrezzo() { return prezzo; }
+    public LocalDateTime getDataCreazione() { return dataCreazione; }
 
     public static class Builder {
         private Long idVendita;
-        private Immobile immobile;
-        private Utente utente;
+
+        private Long immobileId;
+        private String immobileNome;
+
+        private Long utenteId;
+        private String utenteUsername;
+        private String utenteEmail;
+
         private BigDecimal prezzo;
         private LocalDateTime dataCreazione;
 
@@ -57,13 +62,28 @@ public class VenditaDTO {
             return this;
         }
 
-        public Builder immobile(Immobile immobile) {
-            this.immobile = immobile;
+        public Builder immobileId(Long immobileId) {
+            this.immobileId = immobileId;
             return this;
         }
 
-        public Builder utente(Utente utente) {
-            this.utente = utente;
+        public Builder immobileNome(String immobileNome) {
+            this.immobileNome = immobileNome;
+            return this;
+        }
+
+        public Builder utenteId(Long utenteId) {
+            this.utenteId = utenteId;
+            return this;
+        }
+
+        public Builder utenteUsername(String utenteUsername) {
+            this.utenteUsername = utenteUsername;
+            return this;
+        }
+
+        public Builder utenteEmail(String utenteEmail) {
+            this.utenteEmail = utenteEmail;
             return this;
         }
 

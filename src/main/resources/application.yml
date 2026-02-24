@@ -1,9 +1,9 @@
 spring:
   application:
-    name: GestioneEventi
+    name: Immobiliare
     version: 0.0.1-SNAPSHOT
   datasource:
-    url: ${DATABASE_URL:jdbc:mysql://localhost:3306/gestione_immobiliare?useSSL=false&allowPublicKeyRetrieval=true}
+    url: ${DATABASE_URL:jdbc:mysql://localhost:3306/immobiliare?useSSL=false&allowPublicKeyRetrieval=true}
     username: ${DATABASE_USERNAME:root}
     password: ${DATABASE_PASSWORD:root}
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -38,3 +38,6 @@ server:
   error:
     whitelabel:
       enabled: false
+
+jwt:
+  secret: ${JWT_SECRET:Example}
